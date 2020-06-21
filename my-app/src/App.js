@@ -5,7 +5,14 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import Toast from 'react-bootstrap/Toast';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
-import Image from 'react-bootstrap/Image'
+import Image from 'react-bootstrap/Image';
+
+// state = {
+//   characters: characters,
+//   pickedChars: [],
+//   topScore: 0,
+//   alertMessage: ""
+// }
 
 
 const ExampleToast = ({ children }) => {
