@@ -1,73 +1,90 @@
 
-import React, { useState } from 'react';
-import Navbar from 'react-bootstrap/NavbarBrand'
+import React, { Component } from 'react';
+import Score from './components/Score/Score.js';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Toast from 'react-bootstrap/Toast';
 import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
-
-// state = {
-//   characters: characters,
-//   pickedChars: [],
-//   topScore: 0,
-//   alertMessage: ""
-// }
+import Characters from './characters.json';
+import Card from './components/Card/Card.js';
 
 
-const ExampleToast = ({ children }) => {
-  const [show, toggleShow] = useState(true);
+// function App() {
+//   return (
+//     <div>Hello</div>
+//   )
+// };
 
 
-  return (
-    <>
-      {!show && <Button onClick={() => toggleShow(true)}>Show Toast</Button>}
-      <Toast show={show} onClose={() => toggleShow(false)}>
-        {/* <Toast.Header>
-          <strong className="mr-auto">React-Bootstrap</strong>
-        </Toast.Header> */}
-        <Toast.Body>{children}</Toast.Body>
-      </Toast>
-    </>
-  );
-};
 
+class App extends Component {
+  state = {
+    clickedCharacters: [],
+    Characters,
+    score: 0,
+    topScore: 0,
+  };
 
-const App = () => (
-  <Container className="p-3">
-    <Navbar className="fixed-header">
-      <p>Clicky Game</p>
-    </Navbar>
-    <Jumbotron>
-      <h1 className="header">Welcome To Clicky Game</h1>
+  shuffleCharacters = (id) => {
+    // let updatedScore = this.state.score;
+    let Shuffled = this.state.Characters;
+    for (let i = Shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * i);
+      const temp = Shuffled[i];
+      Shuffled[i] = Shuffled[j];
+      Shuffled[j] = temp;
+    };
+    this.setState({Characters: Shuffled})
 
-    </Jumbotron>
+    this.checkIfCorrect(id);
+
+  };
+  
+  checkIfCorrect = (id) => {
+     let updatedScore = this.state.score;
+
     
-        <span role="img" aria-label="clickable" href="../public/logo192.png">
-        <Image src="appa.png" thumbnail />
-        </span>
-        <span role="img" aria-label="clickable" href="../public/logo192.png">
-        <Image src="azula.png" thumbnail />
-        </span>
-        <span role="img" aria-label="clickable" href="../public/logo192.png">
-        <Image src="iroh.jpg" thumbnail />
-        </span>
-        <span role="img" aria-label="clickable" href="../public/logo192.png">
-        <Image src="katara.jpeg" thumbnail />
-        </span>
-        <span role="img" aria-label="clickable" href="../public/logo192.png">
-        <Image src="sokka.jpg" thumbnail />
-        </span>
-        <span role="img" aria-label="clickable" href="../public/logo192.png">
-        <Image src="toph.png" thumbnail />
-        </span>
-        <span role="img" aria-label="clickable" href="../public/logo192.png">
-        <Image src="zuko.jpg" thumbnail />
-        </span>
-        <span role="img" aria-label="clickable" href="../public/logo192.png">
-        <Image src="aang.png" thumbnail />
-        </span>
-  </Container>
-);
+    if (!(id in this.state.clickedCharacters)) {
+      updatedScore++
+      let updatedClicked = this.state.clickedCharacters.slice();
+      updatedClicked.push(id);
+      this.setState({clickedCharacters: updatedClicked});
+    } else {
+      updatedScore = 0
+      alert("Game Over!")
+      this.setState({clickedCharacters: []});
+    };
+  }
+  //This will render the jumbotron, Navbar and imgs on page
+  render() {
+    return(
+    <Container className="p-3">
+      <Navbar className="fixed-header">
+        <p>Clicky Game</p>
+        <Score/>
+      </Navbar>
+      <Jumbotron>
+        <h1 className="header">Welcome To Clicky Game</h1>
+
+      </Jumbotron>
+
+      {Characters.map(C => 
+      {
+        return(
+          <Card shuffleCharacters = {this.shuffleCharacters} id={C.id} key={C.id} name = {C.name} image = {C.image}/>
+        )
+      })
+      }
+
+    </Container>
+    
+    );
+  };
+
+
+
+};
 
 export default App;
