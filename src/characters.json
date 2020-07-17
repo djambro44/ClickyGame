@@ -1,0 +1,63 @@
+[
+
+{
+    "id": 1,
+    "name": "aang",
+    "image": "aang.png",
+    "count": 0
+},
+
+{
+    "id": 2,
+    "name": "katara",
+    "image": "katara.jpeg",
+    "count": 0
+},
+
+{
+    "id": 3,
+    "name": "aapa",
+    "image": "appa.png",
+    "count": 0
+},
+
+{
+    "id": 4,
+    "name": "azula",
+    "image": "azula.png",
+    "count": 0
+},
+
+{
+    "id": 5,
+    "name": "iroh",
+    "image": "iroh.jpg",
+    "count": 0
+},
+
+{
+    "id": 6,
+    "name": "sokka",
+    "image": "sokka.jpg",
+    "count": 0
+},
+{
+    "id": 7,
+    "name": "toph",
+    "image": "toph.png",
+    "count": 0
+},
+{
+    "id": 8,
+    "name": "zuko",
+    "image": "zuko.jpg",
+    "count": 0
+}
+
+
+
+
+
+
+
+]
