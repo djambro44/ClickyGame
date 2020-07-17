@@ -43,32 +43,36 @@ class App extends Component {
   };
   
   checkIfCorrect = (id) => {
-     let updatedScore = this.state.score;
+    let updatedScore = this.state.score;
 
-    
-    if (!(id in this.state.clickedCharacters)) {
-      updatedScore++
-      this.state.score = updatedScore
-      let updatedClicked = this.state.clickedCharacters.slice();
-      updatedClicked.push(id);
-      this.setState({clickedCharacters: updatedClicked});
-      console.log(updatedScore)
-    } else {
-      updatedScore = 0
-      alert("Game Over!")
-      this.setState({clickedCharacters: []});
-    };
-  }
-  //This will render the jumbotron, Navbar and imgs on page
-  render() {
-    return(
-    <Container className="p-3">
-      <Navbar className="fixed-header">
-        <p>Clicky Game</p>
-        <Score/>
-      </Navbar>
-      <Jumbotron>
-        <h1 className="header">Welcome To Clicky Game</h1>
+   
+   if (!(id in this.state.clickedCharacters)) {
+     // updatedScore++
+     // this.state.score = updatedScore
+     this.setState({score: this.state.score + 1})
+     let updatedClicked = this.state.clickedCharacters.slice();
+     updatedClicked.push(id);
+     this.setState({clickedCharacters: updatedClicked});
+     console.log(this.state.score)
+     if (this.state.score >= this.state.topScore){
+       this.setState ({topScore: this.state.score + 1})
+     }
+   } else {
+    //  updatedScore = 0
+     alert("Game Over!")
+     this.setState({clickedCharacters: [], score: 0});
+   };
+ }
+ //This will render the jumbotron, Navbar and imgs on page
+ render() {
+   return(
+   <Container className="p-3">
+     <Navbar className="fixed-header">
+       <p>Clicky Game</p>
+       <Score score = {this.state.score} topScore = {this.state.topScore}/>
+     </Navbar>
+     <Jumbotron>
+       <h1 className="header">Welcome To Clicky Game</h1>
 
       </Jumbotron>
 

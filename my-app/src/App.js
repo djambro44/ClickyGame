@@ -47,12 +47,13 @@ class App extends Component {
 
     
     if (!(id in this.state.clickedCharacters)) {
-      updatedScore++
-      this.state.score = updatedScore
+      // updatedScore++
+      // this.state.score = updatedScore
+      this.setState({score: (previousScore) => {previousScore+=1}})
       let updatedClicked = this.state.clickedCharacters.slice();
       updatedClicked.push(id);
       this.setState({clickedCharacters: updatedClicked});
-      console.log(updatedScore)
+      console.log(this.state.score)
     } else {
       updatedScore = 0
       alert("Game Over!")
@@ -65,7 +66,7 @@ class App extends Component {
     <Container className="p-3">
       <Navbar className="fixed-header">
         <p>Clicky Game</p>
-        <Score/>
+        <Score updatedScore = {this.state.score}/>
       </Navbar>
       <Jumbotron>
         <h1 className="header">Welcome To Clicky Game</h1>
